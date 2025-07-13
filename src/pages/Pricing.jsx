@@ -23,7 +23,7 @@ const Pricing = () => {
     {
       title: t('pricing.perPerson.title'),
       price: '€6',
-      duration: 'per hour',
+      duration: t('pricing.perPersonHour'),
       description: t('pricing.perPerson.description'),
       features: getFeatures('pricing.perPerson.features'),
       popular: false
@@ -31,7 +31,7 @@ const Pricing = () => {
     {
       title: t('pricing.adultRoom.title'),
       price: '€3',
-      duration: t('pricing.perPerson') + '/' + t('pricing.hours').slice(0, -1),
+      duration: t('pricing.perPersonHour'),
       description: t('pricing.adultRoom.description'),
       features: getFeatures('pricing.adultRoom.features'),
       popular: false

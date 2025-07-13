@@ -78,6 +78,12 @@ export const translations = {
           text: "Highly recommend for any celebration. Clean, safe, and the kids absolutely loved it!",
           author: "Elena Dimitrova"
         }
+      },
+      cta: {
+        title: "Ready to Create Amazing Memories?",
+        description: "Book your perfect celebration today and let us handle the details while you enjoy unforgettable moments with your loved ones.",
+        phone: "(555) 123-KIDS",
+        email: "info@happykidscenter.com"
       }
     },
 
@@ -131,6 +137,7 @@ export const translations = {
       guests: "guests",
       adults: "adults",
       perPerson: "per person",
+      perPersonHour: "per person/hour",
       adultsOnly: "adults only",
       bookNow: "Book Now",
       mostPopular: "Most Popular"
@@ -254,6 +261,33 @@ export const translations = {
           contactEmail: "Enter your email",
           contactPhone: "Enter your phone number",
           specialRequests: "Any special requests or requirements..."
+        },
+        bookingType: "Booking Type",
+        bookingOptions: {
+          venueRental: "Venue Rental - Both Rooms",
+          venueRentalDesc: "Private access for up to 40 people (3h: €240, 4h: €300, 5h: €350, 6h: €380)",
+          perPerson: "Per Person Pricing",
+          perPersonDesc: "Flexible pricing perfect for families (1 kid + 1 adult: €6/hour)",
+          adultsOnly: "Adults Only",
+          adultsOnlyDesc: "Adult recreation room only (€3 per person/hour)"
+        },
+        guestCount: "Guest Count & Services",
+        numberOfKids: "Number of Kids",
+        numberOfAdults: "Number of Adults",
+        additionalServices: "Additional Services (Optional)",
+        services: {
+          decorations: "Party Decorations (+€50)",
+          decorationsDesc: "Balloons, banners, and themed decorations",
+          cake: "Birthday Cake (+€30)",
+          cakeDesc: "Custom birthday cake for your celebration",
+          favors: "Party Favors (+€40)",
+          favorsDesc: "Take-home goodies for all kids",
+          catering: "Catering & Snacks (+€60)",
+          cateringDesc: "Assorted snacks and drinks for guests",
+          facePainting: "Face Painting (+€80)",
+          facePaintingDesc: "Professional face painting for kids",
+          entertainment: "Entertainment Host (+€100)",
+          entertainmentDesc: "Professional entertainer for activities and games"
         }
       },
       review: {
@@ -392,6 +426,12 @@ export const translations = {
           text: "Горещо препоръчвам за всеки празник. Чисто, безопасно и децата го обожаваха!",
           author: "Елена Димитрова"
         }
+      },
+      cta: {
+        title: "Готови да създадете невероятни спомени?",
+        description: "Резервирайте вашето перфектно празнуване днес и оставете нас да се погрижим за детайлите, докато вие се наслаждавате на незабравими моменти с любимите си хора.",
+        phone: "(555) 123-KIDS",
+        email: "info@happykidscenter.com"
       }
     },
 
@@ -445,6 +485,7 @@ export const translations = {
       guests: "гости",
       adults: "възрастни",
       perPerson: "на човек",
+      perPersonHour: "на човек/час",
       adultsOnly: "само възрастни",
       bookNow: "Резервирайте сега",
       mostPopular: "Най-популярно"
@@ -568,6 +609,33 @@ export const translations = {
           contactEmail: "Въведете имейла си",
           contactPhone: "Въведете телефонния си номер",
           specialRequests: "Някакви специални заявки или изисквания..."
+        },
+        bookingType: "Тип резервация",
+        bookingOptions: {
+          venueRental: "Наем на помещението - Двете стаи",
+          venueRentalDesc: "Частен достъп за до 40 души (3ч: €240, 4ч: €300, 5ч: €350, 6ч: €380)",
+          perPerson: "Цена на човек",
+          perPersonDesc: "Гъвкаво ценообразуване, перфектно за семейства (1 дете + 1 възрастен: €6/час)",
+          adultsOnly: "Само възрастни",
+          adultsOnlyDesc: "Само стая за възрастни (€3 на човек/час)"
+        },
+        guestCount: "Брой гости и услуги",
+        numberOfKids: "Брой деца",
+        numberOfAdults: "Брой възрастни",
+        additionalServices: "Допълнителни услуги (по избор)",
+        services: {
+          decorations: "Декорация за партито (+€50)",
+          decorationsDesc: "Балони, банери и тематични декорации",
+          cake: "Торта за рожден ден (+€30)",
+          cakeDesc: "Персонализирана торта за рождения ден за вашето празнуване",
+          favors: "Подаръчета за гостите (+€40)",
+          favorsDesc: "Подаръчета за вкъщи за всички деца",
+          catering: "Кетъринг и закуски (+€60)",
+          cateringDesc: "Разнообразни закуски и напитки за гостите",
+          facePainting: "Рисуване на лица (+€80)",
+          facePaintingDesc: "Професионално рисуване на лица за деца",
+          entertainment: "Аниматор (+€100)",
+          entertainmentDesc: "Професионален аниматор за дейности и игри"
         }
       },
       review: {
@@ -587,7 +655,7 @@ export const translations = {
         nextSteps: "Следващи стъпки?",
         step1: "Ще прегледаме резервацията ви в рамките на 24 часа",
         step2: "Ще получите имейл за потвърждение с детайли за плащане",
-        step3: "Окончателното потвърждение ще бъде изпратено 48 часа преди събитието ви",
+        step3: "Окончателното потвърдение ще бъде изпратено 48 часа преди събитието ви",
         newBooking: "Направете нова резервация"
       },
       validation: {

@@ -284,10 +284,10 @@ const Reservations = () => {
               {/* Step 1: Contact Information */}
               {currentStep === 1 && (
                 <div>
-                  <h2 style={{marginBottom: '2rem', textAlign: 'center'}}>Contact Information</h2>
+                  <h2 style={{marginBottom: '2rem', textAlign: 'center'}}>{t('reservations.form.contactName')}</h2>
                   
                   <div className="form-group">
-                    <label htmlFor="contactName">Full Name *</label>
+                    <label htmlFor="contactName">{t('reservations.form.contactName')} *</label>
                     <input
                       type="text"
                       id="contactName"
@@ -295,13 +295,13 @@ const Reservations = () => {
                       value={formData.contactName}
                       onChange={handleChange}
                       required
-                      placeholder="Enter your full name"
+                      placeholder={t('reservations.form.placeholders.contactName')}
                     />
                   </div>
 
                   <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'}}>
                     <div className="form-group">
-                      <label htmlFor="contactEmail">Email Address *</label>
+                      <label htmlFor="contactEmail">{t('reservations.form.contactEmail')} *</label>
                       <input
                         type="email"
                         id="contactEmail"
@@ -309,12 +309,12 @@ const Reservations = () => {
                         value={formData.contactEmail}
                         onChange={handleChange}
                         required
-                        placeholder="your.email@example.com"
+                        placeholder={t('reservations.form.placeholders.contactEmail')}
                       />
                     </div>
 
                     <div className="form-group">
-                      <label htmlFor="contactPhone">Phone Number *</label>
+                      <label htmlFor="contactPhone">{t('reservations.form.contactPhone')} *</label>
                       <input
                         type="tel"
                         id="contactPhone"
@@ -322,7 +322,7 @@ const Reservations = () => {
                         value={formData.contactPhone}
                         onChange={handleChange}
                         required
-                        placeholder="(555) 123-4567"
+                        placeholder={t('reservations.form.placeholders.contactPhone')}
                       />
                     </div>
                   </div>
@@ -332,10 +332,10 @@ const Reservations = () => {
               {/* Step 2: Event Details */}
               {currentStep === 2 && (
                 <div>
-                  <h2 style={{marginBottom: '2rem', textAlign: 'center'}}>Event Details</h2>
+                  <h2 style={{marginBottom: '2rem', textAlign: 'center'}}>{t('reservations.steps.details')}</h2>
                   
                   <div className="form-group">
-                    <label htmlFor="eventType">Event Type *</label>
+                    <label htmlFor="eventType">{t('reservations.form.eventType')} *</label>
                     <select
                       id="eventType"
                       name="eventType"
@@ -343,18 +343,18 @@ const Reservations = () => {
                       onChange={handleChange}
                       required
                     >
-                      <option value="">Select event type</option>
-                      <option value="birthday-party">Birthday Party</option>
-                      <option value="family-gathering">Family Gathering</option>
+                      <option value="">{t('reservations.form.placeholders.eventType')}</option>
+                      <option value="birthday-party">{t('reservations.form.eventTypeOptions.birthday')}</option>
+                      <option value="family-gathering">{t('reservations.form.eventTypeOptions.family')}</option>
                       <option value="playdate">Group Playdate</option>
-                      <option value="celebration">Special Celebration</option>
+                      <option value="celebration">{t('reservations.form.eventTypeOptions.other')}</option>
                       <option value="other">Other</option>
                     </select>
                   </div>
 
                   <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'}}>
                     <div className="form-group">
-                      <label htmlFor="eventDate">Event Date *</label>
+                      <label htmlFor="eventDate">{t('reservations.form.date')} *</label>
                       <input
                         type="date"
                         id="eventDate"
@@ -367,7 +367,7 @@ const Reservations = () => {
                     </div>
 
                     <div className="form-group">
-                      <label htmlFor="startTime">Start Time *</label>
+                      <label htmlFor="startTime">{t('reservations.form.startTime')} *</label>
                       <select
                         id="startTime"
                         name="startTime"
@@ -375,7 +375,7 @@ const Reservations = () => {
                         onChange={handleChange}
                         required
                       >
-                        <option value="">Select start time</option>
+                        <option value="">{t('reservations.form.placeholders.startTime')}</option>
                         <option value="09:00">9:00 AM</option>
                         <option value="10:00">10:00 AM</option>
                         <option value="11:00">11:00 AM</option>
@@ -393,7 +393,7 @@ const Reservations = () => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="duration">Duration (hours) *</label>
+                    <label htmlFor="duration">{t('reservations.form.duration')} *</label>
                     <select
                       id="duration"
                       name="duration"
@@ -401,12 +401,12 @@ const Reservations = () => {
                       onChange={handleChange}
                       required
                     >
-                      <option value="3">3 hours</option>
-                      <option value="4">4 hours</option>
-                      <option value="5">5 hours</option>
-                      <option value="6">6 hours</option>
-                      <option value="7">7 hours</option>
-                      <option value="8">8 hours</option>
+                      <option value="3">{t('reservations.form.durationOptions.3')}</option>
+                      <option value="4">{t('reservations.form.durationOptions.4')}</option>
+                      <option value="5">{t('reservations.form.durationOptions.5')}</option>
+                      <option value="6">6 {t('pricing.hours')}</option>
+                      <option value="7">7 {t('pricing.hours')}</option>
+                      <option value="8">8 {t('pricing.hours')}</option>
                     </select>
                     {formData.startTime && formData.duration && (
                       <div style={{fontSize: '0.9rem', color: validateEndTime() ? '#28a745' : '#dc3545', marginTop: '0.5rem'}}>
@@ -416,7 +416,7 @@ const Reservations = () => {
                   </div>
 
                   <div className="form-group">
-                    <label>Booking Type *</label>
+                    <label>{t('reservations.form.bookingType')} *</label>
                     <div style={{display: 'grid', gap: '1rem', marginTop: '0.5rem'}}>
                       <label style={{
                         display: 'flex',
@@ -437,9 +437,9 @@ const Reservations = () => {
                           style={{marginRight: '1rem'}}
                         />
                         <div>
-                          <div style={{fontWeight: 'bold'}}>Venue Rental - Both Rooms</div>
+                          <div style={{fontWeight: 'bold'}}>{t('reservations.form.bookingOptions.venueRental')}</div>
                           <div style={{fontSize: '0.9rem', color: '#666'}}>
-                            Private access for up to 40 people (3h: €240, 4h: €300, 5h: €350, 6h: €380)
+                            {t('reservations.form.bookingOptions.venueRentalDesc')}
                           </div>
                         </div>
                       </label>
@@ -463,9 +463,9 @@ const Reservations = () => {
                           style={{marginRight: '1rem'}}
                         />
                         <div>
-                          <div style={{fontWeight: 'bold'}}>Per-Person Visit</div>
+                          <div style={{fontWeight: 'bold'}}>{t('reservations.form.bookingOptions.perPerson')}</div>
                           <div style={{fontSize: '0.9rem', color: '#666'}}>
-                            €6/hour (1 kid + 1 parent), +€3/hour each extra person. 5+ hours: discount rates apply
+                            {t('reservations.form.bookingOptions.perPersonDesc')}
                           </div>
                         </div>
                       </label>
@@ -489,9 +489,9 @@ const Reservations = () => {
                           style={{marginRight: '1rem'}}
                         />
                         <div>
-                          <div style={{fontWeight: 'bold'}}>Adults Only</div>
+                          <div style={{fontWeight: 'bold'}}>{t('reservations.form.bookingOptions.adultsOnly')}</div>
                           <div style={{fontSize: '0.9rem', color: '#666'}}>
-                            €3/hour per adult (Adult room only, no kids room access). 5+ hours: €2/hour
+                            {t('reservations.form.bookingOptions.adultsOnlyDesc')}
                           </div>
                         </div>
                       </label>
@@ -503,12 +503,12 @@ const Reservations = () => {
               {/* Step 3: Guest Count & Services */}
               {currentStep === 3 && (
                 <div>
-                  <h2 style={{marginBottom: '2rem', textAlign: 'center'}}>Guest Count & Services</h2>
+                  <h2 style={{marginBottom: '2rem', textAlign: 'center'}}>{t('reservations.form.guestCount')}</h2>
                   
                   {formData.bookingType !== 'adults-only' && (
                     <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'}}>
                       <div className="form-group">
-                        <label htmlFor="kidCount">Number of Kids {formData.bookingType === 'per-person' ? '' : '*'}</label>
+                        <label htmlFor="kidCount">{t('reservations.form.numberOfKids')} {formData.bookingType === 'per-person' ? '' : '*'}</label>
                         <input
                           type="number"
                           id="kidCount"
@@ -523,7 +523,7 @@ const Reservations = () => {
                       </div>
 
                       <div className="form-group">
-                        <label htmlFor="adultCount">Number of Adults *</label>
+                        <label htmlFor="adultCount">{t('reservations.form.numberOfAdults')} *</label>
                         <input
                           type="number"
                           id="adultCount"
@@ -541,7 +541,7 @@ const Reservations = () => {
 
                   {formData.bookingType === 'adults-only' && (
                     <div className="form-group">
-                      <label htmlFor="adultCount">Number of Adults *</label>
+                      <label htmlFor="adultCount">{t('reservations.form.numberOfAdults')} *</label>
                       <input
                         type="number"
                         id="adultCount"
@@ -573,15 +573,15 @@ const Reservations = () => {
                   )}
 
                   <div className="form-group">
-                    <label>Additional Services (Optional)</label>
+                    <label>{t('reservations.form.additionalServices')}</label>
                     <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '0.5rem', marginTop: '0.5rem'}}>
                       {[
-                        { value: 'party-decorations', label: 'Party Decorations (+€50)', desc: 'Balloons, banners, and themed decorations' },
-                        { value: 'birthday-cake', label: 'Birthday Cake (+€30)', desc: 'Custom birthday cake for your celebration' },
-                        { value: 'party-favors', label: 'Party Favors (+€40)', desc: 'Take-home goodies for all kids' },
-                        { value: 'catering-snacks', label: 'Catering & Snacks (+€60)', desc: 'Assorted snacks and drinks for guests' },
-                        { value: 'face-painting', label: 'Face Painting (+€80)', desc: 'Professional face painting for kids' },
-                        { value: 'entertainment', label: 'Entertainment Host (+€100)', desc: 'Professional entertainer for activities and games' }
+                        { value: 'party-decorations', label: t('reservations.form.services.decorations'), desc: t('reservations.form.services.decorationsDesc') },
+                        { value: 'birthday-cake', label: t('reservations.form.services.cake'), desc: t('reservations.form.services.cakeDesc') },
+                        { value: 'party-favors', label: t('reservations.form.services.favors'), desc: t('reservations.form.services.favorsDesc') },
+                        { value: 'catering-snacks', label: t('reservations.form.services.catering'), desc: t('reservations.form.services.cateringDesc') },
+                        { value: 'face-painting', label: t('reservations.form.services.facePainting'), desc: t('reservations.form.services.facePaintingDesc') },
+                        { value: 'entertainment', label: t('reservations.form.services.entertainment'), desc: t('reservations.form.services.entertainmentDesc') }
                       ].map((service) => (
                         <label key={service.value} style={{
                           display: 'flex',
@@ -785,7 +785,7 @@ const Reservations = () => {
                     className="btn"
                     style={{background: '#6c757d'}}
                   >
-                    Previous Step
+                    {t('reservations.form.previous')}
                   </button>
                 )}
                 
@@ -797,7 +797,7 @@ const Reservations = () => {
                     style={{marginLeft: 'auto'}}
                     disabled={currentStep === 2 && (!validateEndTime() || (formData.bookingType === 'venue-rental' && (parseInt(formData.kidCount) + parseInt(formData.adultCount)) > 40))}
                   >
-                    Next Step
+                    {t('reservations.form.next')}
                   </button>
                 ) : (
                   <button
@@ -806,7 +806,7 @@ const Reservations = () => {
                     style={{marginLeft: 'auto', background: '#4ecdc4'}}
                     disabled={!validateEndTime() || (formData.bookingType === 'venue-rental' && (parseInt(formData.kidCount) + parseInt(formData.adultCount)) > 40)}
                   >
-                    Submit Booking
+                    {t('reservations.form.confirm')}
                   </button>
                 )}
               </div>

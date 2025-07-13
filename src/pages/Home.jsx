@@ -336,17 +336,121 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section section-cta">
-        <div className="container">
-          <h2>{t('home.hero.cta')}</h2>
-          <p>{t('home.hero.description')}</p>
-          <div className="cta-buttons">
-            <Link to="/reservations" className="cta-button">
-              {t('nav.reservations')}
-            </Link>
-            <Link to="/pricing" className="cta-button cta-button--secondary">
-              {t('nav.pricing')}
-            </Link>
+      <section className="section section-cta" style={{
+        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 50%, #4ecdc4 100%)',
+        color: 'white',
+        padding: '5rem 0',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* Background Pattern */}
+        <div style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          opacity: 0.3
+        }}></div>
+        
+        <div className="container" style={{position: 'relative', zIndex: 2, textAlign: 'center'}}>
+          <div style={{maxWidth: '800px', margin: '0 auto'}}>
+            <div style={{fontSize: '4rem', marginBottom: '1.5rem'}}>🎉</div>
+            <h2 style={{
+              fontSize: '3.5rem',
+              fontWeight: 'bold',
+              marginBottom: '1.5rem',
+              textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+              lineHeight: '1.2'
+            }}>
+              {t('home.cta.title')}
+            </h2>
+            <p style={{
+              fontSize: '1.4rem',
+              marginBottom: '3rem',
+              opacity: 0.95,
+              lineHeight: '1.6',
+              maxWidth: '600px',
+              margin: '0 auto 3rem'
+            }}>
+              {t('home.cta.description')}
+            </p>
+            <div className="cta-buttons" style={{
+              display: 'flex',
+              gap: '1.5rem',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexWrap: 'wrap'
+            }}>
+              <Link 
+                to="/reservations" 
+                className="cta-button"
+                style={{
+                  background: 'linear-gradient(45deg, #ff6b6b, #ff8e8e)',
+                  color: 'white',
+                  padding: '1.2rem 2.5rem',
+                  borderRadius: '50px',
+                  textDecoration: 'none',
+                  fontWeight: 'bold',
+                  fontSize: '1.2rem',
+                  boxShadow: '0 8px 25px rgba(255,107,107,0.4)',
+                  transition: 'all 0.3s ease',
+                  border: 'none',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                  minWidth: '200px'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'translateY(-3px)'
+                  e.target.style.boxShadow = '0 12px 35px rgba(255,107,107,0.6)'
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'translateY(0)'
+                  e.target.style.boxShadow = '0 8px 25px rgba(255,107,107,0.4)'
+                }}
+              >
+                🎊 {t('nav.reservations')}
+              </Link>
+              <Link 
+                to="/pricing" 
+                className="cta-button cta-button--secondary"
+                style={{
+                  background: 'transparent',
+                  color: 'white',
+                  padding: '1.2rem 2.5rem',
+                  borderRadius: '50px',
+                  textDecoration: 'none',
+                  fontWeight: 'bold',
+                  fontSize: '1.2rem',
+                  border: '3px solid white',
+                  transition: 'all 0.3s ease',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                  minWidth: '200px'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = 'white'
+                  e.target.style.color = '#667eea'
+                  e.target.style.transform = 'translateY(-3px)'
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = 'transparent'
+                  e.target.style.color = 'white'
+                  e.target.style.transform = 'translateY(0)'
+                }}
+              >
+                💰 {t('nav.pricing')}
+              </Link>
+            </div>
+            <div style={{
+              marginTop: '2.5rem',
+              fontSize: '1rem',
+              opacity: 0.8
+            }}>
+              <span style={{marginRight: '2rem'}}>📞 {t('home.cta.phone')}</span>
+              <span>📧 {t('home.cta.email')}</span>
+            </div>
           </div>
         </div>
       </section>
