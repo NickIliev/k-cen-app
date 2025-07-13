@@ -13,6 +13,7 @@ const Contact = () => {
   })
 
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [openFAQ, setOpenFAQ] = useState(null)
 
   const handleChange = (e) => {
     setFormData({
@@ -94,6 +95,48 @@ const Contact = () => {
       bio: 'Helps families find the perfect booking option for their needs'
     }
   ]
+
+  const faqData = [
+    {
+      id: 1,
+      question: t('contact.faq.q1.question'),
+      answer: t('contact.faq.q1.answer')
+    },
+    {
+      id: 2,
+      question: t('contact.faq.q2.question'),
+      answer: t('contact.faq.q2.answer')
+    },
+    {
+      id: 3,
+      question: t('contact.faq.q3.question'),
+      answer: t('contact.faq.q3.answer')
+    },
+    {
+      id: 4,
+      question: t('contact.faq.q4.question'),
+      answer: t('contact.faq.q4.answer')
+    },
+    {
+      id: 5,
+      question: "Do you provide food and drinks?",
+      answer: "Our refreshment bar offers snacks and beverages for adults. You're welcome to bring your own food for parties, or we can coordinate with local catering services."
+    },
+    {
+      id: 6,
+      question: "Can I work remotely while my child plays?",
+      answer: "Absolutely! Our adult recreation room has high-speed WiFi, quiet zones, and comfortable seating - perfect for remote work while kids play safely nearby."
+    },
+    {
+      id: 7,
+      question: "What's included in birthday party packages?",
+      answer: "Venue access, basic decorations setup, and staff assistance. Additional services like catering coordination and extended decorations are available for extra fees."
+    }
+  ]
+
+  const toggleFAQ = (faqId) => {
+    setOpenFAQ(openFAQ === faqId ? null : faqId)
+  }
 
   return (
     <div>
@@ -279,36 +322,121 @@ const Contact = () => {
       {/* FAQ Section */}
       <section className="section" style={{backgroundColor: '#f8f9fa'}}>
         <div className="container">
-          <h2 className="section-title">Frequently Asked Questions</h2>
-          <div className="card-grid">
-            <div className="card">
-              <h3>What are your booking requirements?</h3>
-              <p>For venue rentals, we require advance booking and a deposit. For per-person visits, you can walk in or book ahead. All children must be supervised by adults.</p>
-            </div>
-            <div className="card">
-              <h3>Do you provide food and drinks?</h3>
-              <p>Our refreshment bar offers snacks and beverages for adults. You're welcome to bring your own food for parties, or we can coordinate with local catering services.</p>
-            </div>
-            <div className="card">
-              <h3>What safety measures do you have?</h3>
-              <p>CCTV monitoring, child-proof locks, safety equipment, and supervised spaces. All children must be accompanied by responsible adults at all times.</p>
-            </div>
-            <div className="card">
-              <h3>Can I work remotely while my child plays?</h3>
-              <p>Absolutely! Our adult recreation room has high-speed WiFi, quiet zones, and comfortable seating - perfect for remote work while kids play safely nearby.</p>
-            </div>
-            <div className="card">
-              <h3>What's included in birthday party packages?</h3>
-              <p>Venue access, basic decorations setup, and staff assistance. Additional services like catering coordination and extended decorations are available for extra fees.</p>
-            </div>
-            <div className="card">
-              <h3>Do you have WiFi and what's the speed?</h3>
-              <p>Yes! We have high-speed WiFi throughout both rooms, making it perfect for remote work, streaming, or staying connected during your visit.</p>
-            </div>
-            <div className="card">
-              <h3>Do you host birthday parties?</h3>
-              <p>Yes! We offer birthday party packages with our dedicated party room available for hourly rental. Packages include decorations, activities, and clean-up. Contact us to book your celebration!</p>
-            </div>
+          <h2 className="section-title">{t('contact.faq.title')}</h2>
+          <p className="section-subtitle" style={{marginBottom: '3rem'}}>
+            Find answers to commonly asked questions about our services and facilities.
+          </p>
+          
+          <div style={{maxWidth: '800px', margin: '0 auto'}}>
+            {faqData.map((faq) => (
+              <div 
+                key={faq.id} 
+                style={{
+                  marginBottom: '1rem',
+                  backgroundColor: 'white',
+                  borderRadius: '12px',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                  overflow: 'hidden',
+                  border: openFAQ === faq.id ? '2px solid #4ecdc4' : '2px solid transparent',
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                <button
+                  onClick={() => toggleFAQ(faq.id)}
+                  style={{
+                    width: '100%',
+                    padding: '1.5rem',
+                    backgroundColor: 'transparent',
+                    border: 'none',
+                    textAlign: 'left',
+                    cursor: 'pointer',
+                    fontSize: '1.1rem',
+                    fontWeight: '600',
+                    color: '#333',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    transition: 'background-color 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = '#f8f9fa'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = 'transparent'
+                  }}
+                >
+                  <span style={{paddingRight: '1rem'}}>{faq.question}</span>
+                  <span 
+                    style={{
+                      fontSize: '1.5rem',
+                      color: '#4ecdc4',
+                      transform: openFAQ === faq.id ? 'rotate(45deg)' : 'rotate(0deg)',
+                      transition: 'transform 0.3s ease',
+                      flexShrink: 0
+                    }}
+                  >
+                    +
+                  </span>
+                </button>
+                
+                <div 
+                  style={{
+                    maxHeight: openFAQ === faq.id ? '300px' : '0',
+                    overflow: 'hidden',
+                    transition: 'max-height 0.3s ease-in-out'
+                  }}
+                >
+                  <div 
+                    style={{
+                      padding: '0 1.5rem 1.5rem 1.5rem',
+                      color: '#666',
+                      lineHeight: '1.6',
+                      fontSize: '1rem',
+                      borderTop: '1px solid #eee'
+                    }}
+                  >
+                    {faq.answer}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div style={{textAlign: 'center', marginTop: '3rem'}}>
+            <p style={{fontSize: '1.1rem', color: '#666', marginBottom: '1rem'}}>
+              Still have questions? We're here to help!
+            </p>
+            <button 
+              style={{
+                background: 'linear-gradient(135deg, #ff6b6b, #4ecdc4)',
+                color: 'white',
+                padding: '1rem 2rem',
+                border: 'none',
+                borderRadius: '25px',
+                fontSize: '1.1rem',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+                boxShadow: '0 4px 15px rgba(255,107,107,0.3)',
+                transition: 'all 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.transform = 'translateY(-2px)'
+                e.target.style.boxShadow = '0 6px 20px rgba(255,107,107,0.4)'
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.transform = 'translateY(0)'
+                e.target.style.boxShadow = '0 4px 15px rgba(255,107,107,0.3)'
+              }}
+              onClick={() => {
+                document.querySelector('#inquiryType').focus()
+                window.scrollTo({
+                  top: document.querySelector('form').offsetTop - 100,
+                  behavior: 'smooth'
+                })
+              }}
+            >
+              📞 Contact Us Directly
+            </button>
           </div>
         </div>
       </section>
