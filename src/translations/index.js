@@ -110,7 +110,7 @@ export const translations = {
           "Suitable for ages 3-12"
         ]
       },
-      perPerson: {
+      perPersonOption: {
         title: "Per Person (Kid + Adult)",
         description: "Perfect for families wanting flexible visit times",
         features: [
@@ -140,7 +140,89 @@ export const translations = {
       perPersonHour: "per person/hour",
       adultsOnly: "adults only",
       bookNow: "Book Now",
-      mostPopular: "Most Popular"
+      mostPopular: "Most Popular",
+      operatingHours: {
+        title: "Operating Hours",
+        daily: "Daily:",
+        timeRange: "9:00 AM - 10:00 PM",
+        lastBooking: "Last booking must end by 10:00 PM.",
+        compliance: "All reservations calculated automatically to ensure compliance."
+      },
+      venueRental: {
+        title: "Venue Rental - Both Rooms",
+        hourlyPricing: "Hourly Pricing (Tiered)",
+        includes: "Includes:",
+        includesDesc: "Both rooms (80m² total), up to 40 people (20 kids + 20 adults), maximum 8 hours rental"
+      },
+      perPersonPricing: {
+        title: "Per Person Pricing",
+        standardRates: "Standard Rates",
+        oneKidParent: "1 Kid + 1 Parent:",
+        additionalPerson: "Each additional person:",
+        discountTitle: "5+ Hours Discount"
+      },
+      adultsOnlyPricing: {
+        title: "Adults Only Option",
+        roomOnly: "Adult Recreation Room Only",
+        standard: "Standard:",
+        discountHours: "5+ Hours:",
+        includesDesc: "PlayStation 5, board games, refreshment bar, WiFi. No kids room access."
+      },
+      spaces: {
+        title: "Our Spaces & Capacity",
+        subtitle: "Two dedicated 40m² rooms designed for different age groups, with modern amenities and fast WiFi throughout.",
+        kidsPlayroom: "Kids Playroom (3-8 years)",
+        kidsSpace: "40m² dedicated space",
+        kidsFocus: "Safe play equipment, interactive games, birthday party setups",
+        adultRoom: "Adult Recreation Room",
+        adultSpace: "40m² entertainment space",
+        adultFocus: "PlayStation 5, board games, refreshment bar, remote work area",
+        combinedVenue: "Combined Venue Capacity",
+        combinedCapacity: "Up to 40 guests total",
+        combinedFocus: "20 kids + 20 adults maximum, perfect for family events"
+      },
+      additionalServices: {
+        title: "Additional Services",
+        subtitle: "Enhance your child's experience with our optional services and special programs.",
+        decorations: "Party Decorations Setup",
+        cake: "Birthday Cake Service",
+        favors: "Party Favors Package",
+        catering: "Catering & Snacks Service",
+        facePainting: "Face Painting",
+        entertainment: "Entertainment Host",
+        extendedHours: "Extended Hours (beyond 8 hours)",
+        perParty: "per party",
+        perCake: "per cake",
+        perHour: "per hour"
+      },
+      bookingInfo: {
+        title: "Booking Information",
+        advanceBooking: "Advance Booking",
+        recommended: "Recommended",
+        advanceDesc: "Book in advance to guarantee availability, especially for weekends and holiday periods.",
+        paymentOptions: "Payment Options",
+        paymentList: [
+          "Cash payments accepted",
+          "Card payments (Visa, Mastercard)",
+          "Bank transfers for venue rentals",
+          "Deposit required for bookings"
+        ],
+        groupDiscounts: "Group Discounts",
+        discount5: "10% off for 5+ regular families",
+        discount10: "15% off for 10+ bookings/month",
+        discountDesc: "Regular visitor discounts apply automatically to your visits."
+      },
+      financialAssistance: {
+        title: "Financial Assistance",
+        subtitle: "We believe every child deserves quality care. We offer various assistance programs to help make our services accessible to all families.",
+        statePrograms: "State Assistance Programs",
+        stateDesc: "We accept state childcare vouchers and subsidies. Contact us to learn about eligibility and application processes.",
+        employerPartnerships: "Employer Partnerships",
+        employerDesc: "Many local employers offer childcare benefits. We work with several companies to provide discounted rates for employees.",
+        flexiblePayment: "Flexible Payment Plans",
+        flexibleDesc: "Need a custom payment arrangement? We're happy to work with families to create payment plans that fit your budget.",
+        discussPayment: "Discuss Payment Options"
+      }
     },
 
     // Contact Page
@@ -163,7 +245,8 @@ export const translations = {
         messagePlaceholder: "Enter your message here..."
       },
       info: {
-        title: "Contact Information",
+        title: "Quick Contact Information",
+        subtitle: "Get in touch with us through any of these convenient methods",
         address: "Address",
         addressValue: "123 Happy Street, Sofia, Bulgaria",
         phone: "Phone",
@@ -174,7 +257,15 @@ export const translations = {
         hoursValue: "Monday - Sunday: 9:00 AM - 10:00 PM"
       },
       staff: {
-        title: "Our Team",
+        title: "Meet Our Leadership Team",
+        subtitle: "Our experienced staff is here to answer your questions and support your family's needs.",
+        contactButton: "Contact",
+        cta: {
+          title: "Need to Speak with Someone Specific?",
+          description: "Our team members are specialists in different areas. Feel free to reach out directly to the person who can best help with your specific needs.",
+          callButton: "Call Main Line",
+          emailButton: "General Email"
+        },
         manager: {
           name: "Anna Petrov",
           role: "Venue Manager",
@@ -458,7 +549,7 @@ export const translations = {
           "Подходяща за възраст 3-12 години"
         ]
       },
-      perPerson: {
+      perPersonOption: {
         title: "На човек (Дете + Възрастен)",
         description: "Перфектно за семейства, които искат гъвкави часове за посещение",
         features: [
@@ -488,7 +579,89 @@ export const translations = {
       perPersonHour: "на човек/час",
       adultsOnly: "само възрастни",
       bookNow: "Резервирайте сега",
-      mostPopular: "Най-популярно"
+      mostPopular: "Най-популярно",
+      operatingHours: {
+        title: "Работно време",
+        daily: "Всеки ден:",
+        timeRange: "9:00 - 22:00",
+        lastBooking: "Последната резервация трябва да завърши до 22:00 ч.",
+        compliance: "Всички резервации се изчисляват автоматично за осигуряване на съответствие."
+      },
+      venueRental: {
+        title: "Наем на помещението - Двете стаи",
+        hourlyPricing: "Почасово ценообразуване (на нива)",
+        includes: "Включва:",
+        includesDesc: "Двете стаи (общо 80м²), до 40 души (20 деца + 20 възрастни), максимум 8 часа наем"
+      },
+      perPersonPricing: {
+        title: "Цена на човек",
+        standardRates: "Стандартни цени",
+        oneKidParent: "1 дете + 1 родител:",
+        additionalPerson: "Всеки допълнителен човек:",
+        discountTitle: "Отстъпка за 5+ часа"
+      },
+      adultsOnlyPricing: {
+        title: "Опция само за възрастни",
+        roomOnly: "Само стая за възрастни",
+        standard: "Стандартно:",
+        discountHours: "5+ часа:",
+        includesDesc: "PlayStation 5, настолни игри, бар, WiFi. Няма достъп до детската стая."
+      },
+      spaces: {
+        title: "Нашите помещения и капацитет",
+        subtitle: "Две специализирани стаи от по 40м², проектирани за различни възрастови групи, с модерни удобства и бърз WiFi навсякъде.",
+        kidsPlayroom: "Детска стая за игра (3-8 години)",
+        kidsSpace: "40м² специализирано пространство",
+        kidsFocus: "Безопасно оборудване за игра, интерактивни игри, организация на рождени дни",
+        adultRoom: "Стая за възрастни",
+        adultSpace: "40м² пространство за забавления",
+        adultFocus: "PlayStation 5, настолни игри, бар, зона за работа",
+        combinedVenue: "Комбиниран капацитет на помещението",
+        combinedCapacity: "До 40 гости общо",
+        combinedFocus: "Максимум 20 деца + 20 възрастни, перфектно за семейни събития"
+      },
+      additionalServices: {
+        title: "Допълнителни услуги",
+        subtitle: "Обогатете преживяването на детето си с нашите допълнителни услуги и специални програми.",
+        decorations: "Подготовка на декорации за партито",
+        cake: "Услуга торта за рожден ден",
+        favors: "Пакет подаръчета за гостите",
+        catering: "Кетъринг и закуски",
+        facePainting: "Рисуване на лица",
+        entertainment: "Водещ на партито",
+        extendedHours: "Допълнителни часове (над 8 часа)",
+        perParty: "на партито",
+        perCake: "на торта",
+        perHour: "на час"
+      },
+      bookingInfo: {
+        title: "Информация за резервация",
+        advanceBooking: "Предварителна резервация",
+        recommended: "Препоръчително",
+        advanceDesc: "Резервирайте предварително, за да гарантирате наличност, особено за уикенди и празнични периоди.",
+        paymentOptions: "Опции за плащане",
+        paymentList: [
+          "Приемат се плащания в брой",
+          "Плащания с карта (Visa, Mastercard)",
+          "Банкови преводи за наем на помещения",
+          "Изисква се депозит за резервации"
+        ],
+        groupDiscounts: "Групови отстъпки",
+        discount5: "10% отстъпка за 5+ редовни семейства",
+        discount10: "15% отстъпка за 10+ резервации/месец",
+        discountDesc: "Отстъпките за редовни посетители се прилагат автоматично към вашите посещения."
+      },
+      financialAssistance: {
+        title: "Финансова помощ",
+        subtitle: "Вярваме, че всяко дете заслужава качествени грижи. Предлагаме различни програми за помощ, за да направим услугите ни достъпни за всички семейства.",
+        statePrograms: "Държавни програми за помощ",
+        stateDesc: "Приемаме държавни ваучери и субсидии за детски грижи. Свържете се с нас, за да научите за условията и процедурите за кандидатстване.",
+        employerPartnerships: "Партньорства с работодатели",
+        employerDesc: "Много местни работодатели предлагат обезщетения за детски грижи. Работим с няколко компании, за да предоставим намалени цени за служители.",
+        flexiblePayment: "Гъвкави планове за плащане",
+        flexibleDesc: "Нуждаете се от персонализирана схема за плащане? Щастливи сме да работим със семейства, за да създадем планове за плащане, които отговарят на вашия бюджет.",
+        discussPayment: "Обсъдете опциите за плащане"
+      }
     },
 
     // Contact Page
@@ -511,7 +684,8 @@ export const translations = {
         messagePlaceholder: "Въведете съобщението си тук..."
       },
       info: {
-        title: "Информация за контакт",
+        title: "Бърза информация за контакт",
+        subtitle: "Свържете се с нас чрез който и да е от тези удобни начини",
         address: "Адрес",
         addressValue: "ул. Щастлива 123, София, България",
         phone: "Телефон",
@@ -522,7 +696,15 @@ export const translations = {
         hoursValue: "Понеделник - Неделя: 9:00 - 22:00"
       },
       staff: {
-        title: "Нашият екип",
+        title: "Запознайте се с нашия ръководен екип",
+        subtitle: "Нашият опитен персонал е тук, за да отговори на вашите въпроси и да подкрепи нуждите на вашето семейство.",
+        contactButton: "Контакт",
+        cta: {
+          title: "Трябва ли да говорите с някой конкретен?",
+          description: "Членовете на нашия екип са специалисти в различни области. Чувствайте се свободни да се свържете директно с човека, който може най-добре да помогне с вашите специфични нужди.",
+          callButton: "Обадете се на основния номер",
+          emailButton: "Общ имейл"
+        },
         manager: {
           name: "Анна Петров",
           role: "Мениджър на площадката",
