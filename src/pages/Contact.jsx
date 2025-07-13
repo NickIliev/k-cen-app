@@ -166,7 +166,7 @@ const Contact = () => {
             flexWrap: 'wrap',
             gap: '1.5rem',
             justifyContent: 'center',
-            maxWidth: '1100px',
+            maxWidth: '1400px',
             margin: '0 auto'
           }}>
             {contactInfo.map((info, index) => (
@@ -693,9 +693,9 @@ const Contact = () => {
           {/* Elegant Staff Cards */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
             gap: '2rem',
-            maxWidth: '1000px',
+            maxWidth: '1400px',
             margin: '0 auto'
           }}>
             {staff.map((member, index) => (
@@ -730,6 +730,7 @@ const Contact = () => {
                     index % 4 === 0 ? '#ff6b6b, #4ecdc4' : 
                     index % 4 === 1 ? '#4ecdc4, #667eea' : 
                     index % 4 === 2 ? '#667eea, #ff6b6b' :
+                    index % 4 === 3 ? '#ff6b6b, #667eea' :
                     '#ff6b6b, #667eea'
                   })`,
                   borderRadius: '20px 20px 0 0'
