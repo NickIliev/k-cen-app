@@ -181,110 +181,410 @@ const Contact = () => {
       {/* Contact Form */}
       <section className="section" style={{backgroundColor: '#f8f9fa'}}>
         <div className="container">
-          <h2 className="section-title">Send Us a Message</h2>
-          <div className="form-container">
-            {isSubmitted ? (
-              <div style={{textAlign: 'center', padding: '2rem'}}>
-                <div style={{fontSize: '4rem', marginBottom: '1rem'}}>✅</div>
-                <h3 style={{color: '#4ecdc4', marginBottom: '1rem'}}>Thank You!</h3>
-                <p>Your message has been sent successfully. We'll get back to you within 24 hours.</p>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'minmax(300px, 1fr) minmax(400px, 2fr)',
+            gap: '3rem',
+            alignItems: 'start',
+            maxWidth: '1200px',
+            margin: '0 auto'
+          }}>
+            {/* Form Info Panel */}
+            <div style={{
+              background: 'linear-gradient(135deg, #667eea, #764ba2)',
+              borderRadius: '20px',
+              padding: '2.5rem',
+              color: 'white',
+              position: 'sticky',
+              top: '2rem'
+            }}>
+              <h2 style={{
+                color: 'white',
+                fontSize: '1.8rem',
+                marginBottom: '1rem',
+                fontWeight: 'bold'
+              }}>
+                💬 {t('contact.form.title')}
+              </h2>
+              
+              <p style={{
+                fontSize: '1rem',
+                lineHeight: '1.6',
+                marginBottom: '2rem',
+                opacity: '0.9'
+              }}>
+                Ready to create amazing memories? Fill out the form and we'll get back to you within 24 hours to discuss your perfect celebration.
+              </p>
+              
+              <div style={{marginBottom: '2rem'}}>
+                <h3 style={{
+                  color: 'white',
+                  fontSize: '1.2rem',
+                  marginBottom: '1rem',
+                  fontWeight: '600'
+                }}>
+                  📞 Quick Contact
+                </h3>
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.8rem'
+                }}>
+                  <a 
+                    href="tel:+15551234543" 
+                    style={{
+                      color: 'white',
+                      textDecoration: 'none',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      padding: '0.5rem 0',
+                      borderBottom: '1px solid rgba(255,255,255,0.2)'
+                    }}
+                  >
+                    📱 (555) 123-KIDS
+                  </a>
+                  <a 
+                    href="mailto:info@happykidscenter.com" 
+                    style={{
+                      color: 'white',
+                      textDecoration: 'none',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      padding: '0.5rem 0'
+                    }}
+                  >
+                    ✉️ info@happykidscenter.com
+                  </a>
+                </div>
               </div>
-            ) : (
-              <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                  <label htmlFor="name">{t('contact.form.name')} *</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    placeholder={t('contact.form.namePlaceholder')}
-                  />
+              
+              <div style={{
+                background: 'rgba(255,255,255,0.1)',
+                borderRadius: '12px',
+                padding: '1.5rem',
+                textAlign: 'center'
+              }}>
+                <div style={{fontSize: '2rem', marginBottom: '0.5rem'}}>⚡</div>
+                <p style={{fontSize: '0.9rem', margin: '0'}}>
+                  <strong>Fast Response Guarantee</strong><br/>
+                  We respond to all inquiries within 24 hours
+                </p>
+              </div>
+            </div>
+            
+            {/* Form Panel */}
+            <div style={{
+              background: 'white',
+              borderRadius: '20px',
+              padding: '2.5rem',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.1)',
+              border: '1px solid #e9ecef'
+            }}>
+              {isSubmitted ? (
+                <div style={{textAlign: 'center', padding: '3rem 1rem'}}>
+                  <div style={{
+                    fontSize: '4rem',
+                    marginBottom: '1.5rem',
+                    background: 'linear-gradient(135deg, #4ecdc4, #44a08d)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text'
+                  }}>
+                    ✅
+                  </div>
+                  <h3 style={{
+                    color: '#4ecdc4',
+                    marginBottom: '1rem',
+                    fontSize: '1.8rem',
+                    fontWeight: 'bold'
+                  }}>
+                    {t('contact.form.success')}
+                  </h3>
+                  <p style={{color: '#666', fontSize: '1.1rem'}}>
+                    Thank you for reaching out! We'll contact you within 24 hours to discuss your celebration plans.
+                  </p>
                 </div>
+              ) : (
+                <form onSubmit={handleSubmit}>
+                  {/* Two-column layout for form fields */}
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '1.5rem',
+                    marginBottom: '1.5rem'
+                  }}>
+                    <div className="form-group">
+                      <label htmlFor="name" style={{
+                        fontSize: '0.9rem',
+                        fontWeight: '600',
+                        color: '#333',
+                        marginBottom: '0.5rem',
+                        display: 'block'
+                      }}>
+                        {t('contact.form.name')} *
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                        placeholder={t('contact.form.namePlaceholder')}
+                        style={{
+                          width: '100%',
+                          padding: '0.8rem',
+                          border: '2px solid #e9ecef',
+                          borderRadius: '10px',
+                          fontSize: '1rem',
+                          transition: 'border-color 0.3s ease',
+                          outline: 'none'
+                        }}
+                        onFocus={(e) => e.target.style.borderColor = '#4ecdc4'}
+                        onBlur={(e) => e.target.style.borderColor = '#e9ecef'}
+                      />
+                    </div>
 
-                <div className="form-group">
-                  <label htmlFor="email">{t('contact.form.email')} *</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    placeholder={t('contact.form.emailPlaceholder')}
-                  />
-                </div>
+                    <div className="form-group">
+                      <label htmlFor="email" style={{
+                        fontSize: '0.9rem',
+                        fontWeight: '600',
+                        color: '#333',
+                        marginBottom: '0.5rem',
+                        display: 'block'
+                      }}>
+                        {t('contact.form.email')} *
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        placeholder={t('contact.form.emailPlaceholder')}
+                        style={{
+                          width: '100%',
+                          padding: '0.8rem',
+                          border: '2px solid #e9ecef',
+                          borderRadius: '10px',
+                          fontSize: '1rem',
+                          transition: 'border-color 0.3s ease',
+                          outline: 'none'
+                        }}
+                        onFocus={(e) => e.target.style.borderColor = '#4ecdc4'}
+                        onBlur={(e) => e.target.style.borderColor = '#e9ecef'}
+                      />
+                    </div>
+                  </div>
 
-                <div className="form-group">
-                  <label htmlFor="phone">{t('contact.form.phone')}</label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder={t('contact.form.phonePlaceholder')}
-                  />
-                </div>
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr',
+                    gap: '1.5rem',
+                    marginBottom: '1.5rem'
+                  }}>
+                    <div className="form-group">
+                      <label htmlFor="phone" style={{
+                        fontSize: '0.9rem',
+                        fontWeight: '600',
+                        color: '#333',
+                        marginBottom: '0.5rem',
+                        display: 'block'
+                      }}>
+                        {t('contact.form.phone')}
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        placeholder={t('contact.form.phonePlaceholder')}
+                        style={{
+                          width: '100%',
+                          padding: '0.8rem',
+                          border: '2px solid #e9ecef',
+                          borderRadius: '10px',
+                          fontSize: '1rem',
+                          transition: 'border-color 0.3s ease',
+                          outline: 'none'
+                        }}
+                        onFocus={(e) => e.target.style.borderColor = '#4ecdc4'}
+                        onBlur={(e) => e.target.style.borderColor = '#e9ecef'}
+                      />
+                    </div>
 
-                <div className="form-group">
-                  <label htmlFor="childAge">Child's Age</label>
-                  <select
-                    id="childAge"
-                    name="childAge"
-                    value={formData.childAge}
-                    onChange={handleChange}
+                    <div className="form-group">
+                      <label htmlFor="childAge" style={{
+                        fontSize: '0.9rem',
+                        fontWeight: '600',
+                        color: '#333',
+                        marginBottom: '0.5rem',
+                        display: 'block'
+                      }}>
+                        Child's Age
+                      </label>
+                      <select
+                        id="childAge"
+                        name="childAge"
+                        value={formData.childAge}
+                        onChange={handleChange}
+                        style={{
+                          width: '100%',
+                          padding: '0.8rem',
+                          border: '2px solid #e9ecef',
+                          borderRadius: '10px',
+                          fontSize: '1rem',
+                          transition: 'border-color 0.3s ease',
+                          outline: 'none',
+                          backgroundColor: 'white'
+                        }}
+                        onFocus={(e) => e.target.style.borderColor = '#4ecdc4'}
+                        onBlur={(e) => e.target.style.borderColor = '#e9ecef'}
+                      >
+                        <option value="">Select age range</option>
+                        <option value="infant">Infant (6-12 months)</option>
+                        <option value="toddler">Toddler (1-2 years)</option>
+                        <option value="preschool">Preschool (3-4 years)</option>
+                        <option value="school-age">School-age (5-12 years)</option>
+                        <option value="multiple">Multiple children</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="form-group" style={{marginBottom: '1.5rem'}}>
+                    <label htmlFor="inquiryType" style={{
+                      fontSize: '0.9rem',
+                      fontWeight: '600',
+                      color: '#333',
+                      marginBottom: '0.5rem',
+                      display: 'block'
+                    }}>
+                      Type of Inquiry *
+                    </label>
+                    <select
+                      id="inquiryType"
+                      name="inquiryType"
+                      value={formData.inquiryType}
+                      onChange={handleChange}
+                      required
+                      style={{
+                        width: '100%',
+                        padding: '0.8rem',
+                        border: '2px solid #e9ecef',
+                        borderRadius: '10px',
+                        fontSize: '1rem',
+                        transition: 'border-color 0.3s ease',
+                        outline: 'none',
+                        backgroundColor: 'white'
+                      }}
+                      onFocus={(e) => e.target.style.borderColor = '#4ecdc4'}
+                      onBlur={(e) => e.target.style.borderColor = '#e9ecef'}
+                    >
+                      <option value="">Select inquiry type</option>
+                      <option value="enrollment">Enrollment Information</option>
+                      <option value="tour">Schedule a Tour</option>
+                      <option value="birthday">Birthday Party Booking</option>
+                      <option value="pricing">Pricing Questions</option>
+                      <option value="programs">Program Details</option>
+                      <option value="general">General Questions</option>
+                      <option value="complaint">Concern or Complaint</option>
+                    </select>
+                  </div>
+
+                  <div className="form-group" style={{marginBottom: '2rem'}}>
+                    <label htmlFor="message" style={{
+                      fontSize: '0.9rem',
+                      fontWeight: '600',
+                      color: '#333',
+                      marginBottom: '0.5rem',
+                      display: 'block'
+                    }}>
+                      {t('contact.form.message')} *
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
+                      required
+                      placeholder={t('contact.form.messagePlaceholder')}
+                      rows="4"
+                      style={{
+                        width: '100%',
+                        padding: '0.8rem',
+                        border: '2px solid #e9ecef',
+                        borderRadius: '10px',
+                        fontSize: '1rem',
+                        transition: 'border-color 0.3s ease',
+                        outline: 'none',
+                        resize: 'vertical',
+                        fontFamily: 'inherit'
+                      }}
+                      onFocus={(e) => e.target.style.borderColor = '#4ecdc4'}
+                      onBlur={(e) => e.target.style.borderColor = '#e9ecef'}
+                    ></textarea>
+                  </div>
+
+                  <button 
+                    type="submit" 
+                    style={{
+                      width: '100%',
+                      background: 'linear-gradient(135deg, #ff6b6b, #4ecdc4)',
+                      color: 'white',
+                      padding: '1rem 2rem',
+                      border: 'none',
+                      borderRadius: '12px',
+                      fontSize: '1.1rem',
+                      fontWeight: 'bold',
+                      cursor: 'pointer',
+                      boxShadow: '0 4px 15px rgba(255,107,107,0.3)',
+                      transition: 'all 0.3s ease',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: '0.5rem'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.transform = 'translateY(-2px)'
+                      e.target.style.boxShadow = '0 6px 20px rgba(255,107,107,0.4)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.transform = 'translateY(0)'
+                      e.target.style.boxShadow = '0 4px 15px rgba(255,107,107,0.3)'
+                    }}
                   >
-                    <option value="">Select age range</option>
-                    <option value="infant">Infant (6-12 months)</option>
-                    <option value="toddler">Toddler (1-2 years)</option>
-                    <option value="preschool">Preschool (3-4 years)</option>
-                    <option value="school-age">School-age (5-12 years)</option>
-                    <option value="multiple">Multiple children</option>
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="inquiryType">Type of Inquiry *</label>
-                  <select
-                    id="inquiryType"
-                    name="inquiryType"
-                    value={formData.inquiryType}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="">Select inquiry type</option>
-                    <option value="enrollment">Enrollment Information</option>
-                    <option value="tour">Schedule a Tour</option>
-                    <option value="birthday">Birthday Party Booking</option>
-                    <option value="pricing">Pricing Questions</option>
-                    <option value="programs">Program Details</option>
-                    <option value="general">General Questions</option>
-                    <option value="complaint">Concern or Complaint</option>
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="message">Message *</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    placeholder="Please tell us more about your inquiry..."
-                    rows="5"
-                  ></textarea>
-                </div>
-
-                <button type="submit" className="btn">
-                  Send Message
-                </button>
-              </form>
-            )}
+                    <span>📤</span>
+                    {t('contact.form.send')}
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
+          
+          {/* Mobile responsiveness */}
+          <style jsx>{`
+            @media (max-width: 768px) {
+              .container > div:first-child {
+                grid-template-columns: 1fr !important;
+                gap: 2rem !important;
+              }
+              
+              .container > div:first-child > div:first-child {
+                position: static !important;
+                order: 2;
+              }
+              
+              form > div:first-child,
+              form > div:nth-child(2) {
+                grid-template-columns: 1fr !important;
+                gap: 1rem !important;
+              }
+            }
+          `}</style>
         </div>
       </section>
 
