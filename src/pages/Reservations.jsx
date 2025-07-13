@@ -111,7 +111,25 @@ const Reservations = () => {
     const startHour = parseInt(formData.startTime.split(':')[0])
     const endHour = startHour + parseInt(formData.duration)
     
-    return endHour <= 22 // Must end by 10 PM (22:00)
+    // Must start at 9 AM or later and end by 10 PM (22:00)
+    return startHour >= 9 && endHour <= 22
+  }
+
+  const validateWorkingHours = () => {
+    if (!formData.startTime) return { isValid: true, message: '' }
+    
+    const startHour = parseInt(formData.startTime.split(':')[0])
+    const endHour = startHour + parseInt(formData.duration)
+    
+    if (startHour < 9) {
+      return { isValid: false, message: 'We open at 9:00 AM. Please select a later start time.' }
+    }
+    
+    if (endHour > 22) {
+      return { isValid: false, message: 'We close at 10:00 PM. Please select a shorter duration or earlier start time.' }
+    }
+    
+    return { isValid: true, message: `Event will end at ${endHour}:00` }
   }
 
   const getEndTime = () => {
@@ -131,11 +149,172 @@ const Reservations = () => {
   ]
 
   const handleNext = () => {
+    // Validate working hours before proceeding
+    const validation = validateWorkingHours()
+    if (!validation.isValid) {
+      alert(validation.message)
+      return
+    }
+    
     setCurrentStep(prev => Math.min(prev + 1, 4))
   }
 
   const handlePrev = () => {
     setCurrentStep(prev => Math.max(prev - 1, 1))
+  }
+
+  // Real-time price estimation component
+  const PriceEstimator = () => {
+    if (currentStep < 3 || !formData.bookingType || !formData.duration) return null
+    
+    const price = calculatePrice()
+    const duration = parseInt(formData.duration)
+    const kidCount = parseInt(formData.kidCount) || 0
+    const adultCount = parseInt(formData.adultCount) || 0
+    
+    if (price === 0) return null
+    
+    return (
+      <div style={{
+        position: 'sticky',
+        top: '20px',
+        background: 'linear-gradient(135deg, #e8f5e8, #f0f9ff)',
+        padding: '1.5rem',
+        borderRadius: '15px',
+        marginBottom: '2rem',
+        border: '2px solid #4ecdc4'
+      }}>
+        <h4 style={{margin: '0 0 1rem 0', color: '#28a745', textAlign: 'center'}}>
+          💰 Price Estimation
+        </h4>
+        
+        <div style={{marginBottom: '1rem'}}>
+          <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem'}}>
+            <span>Booking Type:</span>
+            <strong>{
+              formData.bookingType === 'venue-rental' ? 'Venue Rental' : 
+              formData.bookingType === 'per-person' ? 'Per-Person Visit' : 
+              'Adults Only'
+            }</strong>
+          </div>
+          <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem'}}>
+            <span>Duration:</span>
+            <strong>{duration} hours</strong>
+          </div>
+          <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem'}}>
+            <span>Guests:</span>
+            <strong>{kidCount > 0 ? `${kidCount} kids, ` : ''}{adultCount} adults</strong>
+          </div>
+        </div>
+
+        {/* Pricing Breakdown */}
+        <div style={{background: 'white', padding: '1rem', borderRadius: '8px', marginBottom: '1rem'}}>
+          {formData.bookingType === 'venue-rental' && (
+            <div>
+              <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                <span>Venue Rental ({duration}h):</span>
+                <strong>€{(() => {
+                  if (duration === 3) return 240
+                  else if (duration === 4) return 300
+                  else if (duration === 5) return 350
+                  else if (duration === 6) return 380
+                  else if (duration > 6) return 380 + (duration - 6) * 65
+                  return 0
+                })()}</strong>
+              </div>
+            </div>
+          )}
+          
+          {formData.bookingType === 'per-person' && (
+            <div>
+              {(() => {
+                const baseGuests = Math.min(kidCount, adultCount)
+                const extraGuests = Math.max(0, (kidCount + adultCount) - (baseGuests * 2))
+                const hourlyRate = duration >= 5 ? 5 : 6
+                const extraRate = duration >= 5 ? 2 : 3
+                const basePrice = baseGuests * hourlyRate * duration
+                const extraPrice = extraGuests * extraRate * duration
+                
+                return (
+                  <div>
+                    <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem'}}>
+                      <span>{baseGuests} kid+parent pairs (€{hourlyRate}/h):</span>
+                      <span>€{basePrice}</span>
+                    </div>
+                    {extraGuests > 0 && (
+                      <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem'}}>
+                        <span>{extraGuests} extra guests (€{extraRate}/h):</span>
+                        <span>€{extraPrice}</span>
+                      </div>
+                    )}
+                    {duration >= 5 && (
+                      <div style={{fontSize: '0.85rem', color: '#28a745', fontStyle: 'italic'}}>
+                        ✓ 5+ hour discount applied!
+                      </div>
+                    )}
+                  </div>
+                )
+              })()}
+            </div>
+          )}
+          
+          {formData.bookingType === 'adults-only' && (
+            <div>
+              {(() => {
+                const hourlyRate = duration >= 5 ? 2 : 3
+                const totalPrice = adultCount * hourlyRate * duration
+                
+                return (
+                  <div>
+                    <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '0.25rem'}}>
+                      <span>{adultCount} adults × €{hourlyRate}/hour:</span>
+                      <span>€{totalPrice}</span>
+                    </div>
+                    {duration >= 5 && (
+                      <div style={{fontSize: '0.85rem', color: '#28a745', fontStyle: 'italic'}}>
+                        ✓ 5+ hour discount applied!
+                      </div>
+                    )}
+                  </div>
+                )
+              })()}
+            </div>
+          )}
+          
+          {formData.additionalServices.length > 0 && (
+            <div style={{borderTop: '1px solid #eee', paddingTop: '0.5rem', marginTop: '0.5rem'}}>
+              <div style={{fontSize: '0.9rem', color: '#666', marginBottom: '0.25rem'}}>Additional Services:</div>
+              {formData.additionalServices.map(service => {
+                const servicePrices = {
+                  'party-decorations': 50,
+                  'birthday-cake': 30,
+                  'party-favors': 40,
+                  'catering-snacks': 60,
+                  'face-painting': 80,
+                  'entertainment': 100
+                }
+                return (
+                  <div key={service} style={{display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem'}}>
+                    <span>{service.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}:</span>
+                    <span>€{servicePrices[service]}</span>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </div>
+
+        <div style={{textAlign: 'center', borderTop: '2px solid #4ecdc4', paddingTop: '1rem'}}>
+          <div style={{fontSize: '1.1rem', color: '#666'}}>Estimated Total:</div>
+          <div style={{fontSize: '2rem', fontWeight: 'bold', color: '#28a745'}}>
+            €{price}
+          </div>
+          <div style={{fontSize: '0.8rem', color: '#999', marginTop: '0.5rem'}}>
+            *Final price confirmed during booking call
+          </div>
+        </div>
+      </div>
+    )
   }
 
   const handleSubmit = (e) => {
@@ -403,14 +582,33 @@ const Reservations = () => {
                     >
                       <option value="3">{t('reservations.form.durationOptions.3')}</option>
                       <option value="4">{t('reservations.form.durationOptions.4')}</option>
-                      <option value="5">{t('reservations.form.durationOptions.5')}</option>
-                      <option value="6">6 {t('pricing.hours')}</option>
-                      <option value="7">7 {t('pricing.hours')}</option>
-                      <option value="8">8 {t('pricing.hours')}</option>
+                      <option value="5">{t('reservations.form.durationOptions.5')} 🎉 Discount!</option>
+                      <option value="6">6 {t('pricing.hours')} 🎉 Discount!</option>
+                      <option value="7">7 {t('pricing.hours')} 🎉 Discount!</option>
+                      <option value="8">8 {t('pricing.hours')} 🎉 Discount!</option>
                     </select>
                     {formData.startTime && formData.duration && (
-                      <div style={{fontSize: '0.9rem', color: validateEndTime() ? '#28a745' : '#dc3545', marginTop: '0.5rem'}}>
-                        Event will end at: {getEndTime()} {!validateEndTime() && '(⚠️ Must end by 10:00 PM)'}
+                      <div style={{fontSize: '0.9rem', marginTop: '0.5rem'}}>
+                        {(() => {
+                          const validation = validateWorkingHours()
+                          return (
+                            <div style={{
+                              color: validation.isValid ? '#28a745' : '#dc3545',
+                              fontWeight: validation.isValid ? 'normal' : 'bold'
+                            }}>
+                              {validation.isValid ? (
+                                <span>✅ {validation.message}</span>
+                              ) : (
+                                <span>⚠️ {validation.message}</span>
+                              )}
+                            </div>
+                          )
+                        })()}
+                        {parseInt(formData.duration) >= 5 && (
+                          <div style={{color: '#ff6b6b', fontSize: '0.85rem', marginTop: '0.25rem'}}>
+                            🎉 5+ hour booking qualifies for discounted rates!
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>
@@ -467,6 +665,10 @@ const Reservations = () => {
                           <div style={{fontSize: '0.9rem', color: '#666'}}>
                             {t('reservations.form.bookingOptions.perPersonDesc')}
                           </div>
+                          <div style={{fontSize: '0.8rem', color: '#28a745', marginTop: '0.25rem'}}>
+                            💰 €{parseInt(formData.duration) >= 5 ? '5' : '6'}/h per kid+parent pair
+                            {parseInt(formData.duration) >= 5 && ' (5+ hour discount!)'}
+                          </div>
                         </div>
                       </label>
 
@@ -493,6 +695,10 @@ const Reservations = () => {
                           <div style={{fontSize: '0.9rem', color: '#666'}}>
                             {t('reservations.form.bookingOptions.adultsOnlyDesc')}
                           </div>
+                          <div style={{fontSize: '0.8rem', color: '#28a745', marginTop: '0.25rem'}}>
+                            💰 €{parseInt(formData.duration) >= 5 ? '2' : '3'}/h per adult
+                            {parseInt(formData.duration) >= 5 && ' (5+ hour discount!)'}
+                          </div>
                         </div>
                       </label>
                     </div>
@@ -504,6 +710,9 @@ const Reservations = () => {
               {currentStep === 3 && (
                 <div>
                   <h2 style={{marginBottom: '2rem', textAlign: 'center'}}>{t('reservations.form.guestCount')}</h2>
+                  
+                  {/* Price Estimator */}
+                  <PriceEstimator />
                   
                   {formData.bookingType !== 'adults-only' && (
                     <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'}}>
@@ -520,6 +729,11 @@ const Reservations = () => {
                           max="20"
                           placeholder="Number of children attending"
                         />
+                        {formData.bookingType === 'per-person' && (
+                          <div style={{fontSize: '0.8rem', color: '#666', marginTop: '0.25rem'}}>
+                            💡 Per-person pricing: Each kid should be paired with 1 adult
+                          </div>
+                        )}
                       </div>
 
                       <div className="form-group">
@@ -535,6 +749,11 @@ const Reservations = () => {
                           max="20"
                           placeholder="Number of adults attending"
                         />
+                        {formData.bookingType === 'per-person' && (
+                          <div style={{fontSize: '0.8rem', color: '#666', marginTop: '0.25rem'}}>
+                            💡 Best value: 1 adult per kid, extra guests charged separately
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}
@@ -556,6 +775,11 @@ const Reservations = () => {
                       <div style={{fontSize: '0.9rem', color: '#666', marginTop: '0.5rem'}}>
                         Adults-only booking: Access to recreation room only (PlayStation 5, board games, bar, WiFi)
                       </div>
+                      {parseInt(formData.duration) >= 5 && (
+                        <div style={{fontSize: '0.85rem', color: '#28a745', marginTop: '0.25rem'}}>
+                          🎉 5+ hours: €2/hour per person (normally €3/hour)
+                        </div>
+                      )}
                     </div>
                   )}
 
@@ -567,8 +791,12 @@ const Reservations = () => {
 
                   {formData.bookingType === 'per-person' && (
                     <div style={{background: '#e8f4fd', border: '1px solid #74b9ff', padding: '1rem', borderRadius: '8px', marginTop: '1rem'}}>
-                      <strong>💡 Per-Person Pricing:</strong> €6/hour for 1 kid + 1 parent, then €3/hour for each additional person. 
-                      {parseInt(formData.duration) >= 5 && ' 5+ hour discount: €5/hour base + €2/hour extra people.'}
+                      <strong>💡 Per-Person Pricing:</strong> €{parseInt(formData.duration) >= 5 ? '5' : '6'}/hour for 1 kid + 1 parent, then €{parseInt(formData.duration) >= 5 ? '2' : '3'}/hour for each additional person.
+                      {parseInt(formData.duration) >= 5 && (
+                        <div style={{color: '#28a745', marginTop: '0.5rem'}}>
+                          🎉 <strong>5+ Hour Discount Active!</strong> Reduced rates applied.
+                        </div>
+                      )}
                     </div>
                   )}
 
@@ -795,7 +1023,10 @@ const Reservations = () => {
                     onClick={handleNext}
                     className="btn"
                     style={{marginLeft: 'auto'}}
-                    disabled={currentStep === 2 && (!validateEndTime() || (formData.bookingType === 'venue-rental' && (parseInt(formData.kidCount) + parseInt(formData.adultCount)) > 40))}
+                    disabled={
+                      (currentStep === 2 && !validateWorkingHours().isValid) ||
+                      (currentStep === 2 && formData.bookingType === 'venue-rental' && (parseInt(formData.kidCount) + parseInt(formData.adultCount)) > 40)
+                    }
                   >
                     {t('reservations.form.next')}
                   </button>
@@ -804,7 +1035,10 @@ const Reservations = () => {
                     type="submit"
                     className="btn"
                     style={{marginLeft: 'auto', background: '#4ecdc4'}}
-                    disabled={!validateEndTime() || (formData.bookingType === 'venue-rental' && (parseInt(formData.kidCount) + parseInt(formData.adultCount)) > 40)}
+                    disabled={
+                      !validateWorkingHours().isValid ||
+                      (formData.bookingType === 'venue-rental' && (parseInt(formData.kidCount) + parseInt(formData.adultCount)) > 40)
+                    }
                   >
                     {t('reservations.form.confirm')}
                   </button>
