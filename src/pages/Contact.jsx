@@ -152,26 +152,120 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Information */}
+      {/* Contact Information - Compact Design */}
       <section className="section">
         <div className="container">
-          <h2 className="section-title">{t('contact.form.title')}</h2>
-          <div className="card-grid">
+          <h2 className="section-title">📍 {t('contact.info.title', 'Quick Contact Information')}</h2>
+          <p className="section-subtitle" style={{marginBottom: '2.5rem'}}>
+            {t('contact.info.subtitle', 'Get in touch with us through any of these convenient methods')}
+          </p>
+          
+          {/* Elegant Contact Cards */}
+          <div style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '1.5rem',
+            justifyContent: 'center',
+            maxWidth: '1100px',
+            margin: '0 auto'
+          }}>
             {contactInfo.map((info, index) => (
-              <div key={index} className="card" style={{textAlign: 'center'}}>
-                <div style={{fontSize: '3rem', marginBottom: '1rem'}}>{info.icon}</div>
-                <h3>{info.title}</h3>
-                {info.details.map((detail, detailIndex) => (
-                  <p key={detailIndex} style={{margin: '0.5rem 0'}}>
-                    {info.link ? (
-                      <a href={info.link} style={{color: '#4ecdc4', textDecoration: 'none'}}>
-                        {detail}
-                      </a>
-                    ) : (
-                      detail
-                    )}
-                  </p>
-                ))}
+              <div 
+                key={index} 
+                style={{
+                  background: 'white',
+                  borderRadius: '16px',
+                  padding: '2rem',
+                  minWidth: '260px',
+                  flex: '1',
+                  maxWidth: '320px',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+                  transition: 'all 0.3s ease',
+                  cursor: info.link ? 'pointer' : 'default',
+                  position: 'relative',
+                  overflow: 'hidden'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'translateY(-4px)'
+                  e.target.style.boxShadow = '0 8px 30px rgba(0,0,0,0.12)'
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'translateY(0)'
+                  e.target.style.boxShadow = '0 4px 20px rgba(0,0,0,0.06)'
+                }}
+                onClick={() => info.link && window.open(info.link, '_blank')}
+              >
+                {/* Subtle gradient accent bar */}
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '3px',
+                  background: `linear-gradient(90deg, ${
+                    index % 3 === 0 ? '#ff6b6b, #4ecdc4' : 
+                    index % 3 === 1 ? '#4ecdc4, #667eea' : 
+                    '#667eea, #ff6b6b'
+                  })`,
+                  borderRadius: '16px 16px 0 0'
+                }}></div>
+                
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '1rem',
+                  marginBottom: '1.2rem'
+                }}>
+                  <div style={{
+                    fontSize: '2.2rem',
+                    filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))'
+                  }}>
+                    {info.icon}
+                  </div>
+                  <h3 style={{
+                    margin: '0',
+                    fontSize: '1.2rem',
+                    fontWeight: '700',
+                    color: '#333'
+                  }}>
+                    {info.title}
+                  </h3>
+                </div>
+                
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '0.4rem'
+                }}>
+                  {info.details.map((detail, detailIndex) => (
+                    <div key={detailIndex} style={{
+                      fontSize: '0.95rem',
+                      color: info.link ? '#4ecdc4' : '#666',
+                      fontWeight: info.link ? '600' : '500',
+                      lineHeight: '1.5',
+                      padding: '0.2rem 0'
+                    }}>
+                      {detail}
+                    </div>
+                  ))}
+                </div>
+                
+                {info.link && (
+                  <div style={{
+                    marginTop: '1rem',
+                    fontSize: '0.85rem',
+                    color: '#999',
+                    fontStyle: 'italic',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem'
+                  }}>
+                    <span>Click to {info.title.toLowerCase() === 'address' ? 'view map' : 
+                             info.title.toLowerCase() === 'phone' ? 'call now' : 
+                             'send email'}</span>
+                    <span style={{ color: '#4ecdc4' }}>→</span>
+                  </div>
+                )}
               </div>
             ))}
           </div>
@@ -588,34 +682,324 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Staff Directory */}
+      {/* Staff Directory - Compact Team Cards */}
       <section className="section">
         <div className="container">
-          <h2 className="section-title">Meet Our Leadership Team</h2>
-          <p className="section-subtitle">
-            Our experienced staff is here to answer your questions and support your family's needs.
+          <h2 className="section-title">👥 {t('contact.staff.title', 'Meet Our Leadership Team')}</h2>
+          <p className="section-subtitle" style={{marginBottom: '2.5rem'}}>
+            {t('contact.staff.subtitle', 'Our experienced staff is here to answer your questions and support your family\'s needs.')}
           </p>
-          <div className="card-grid">
+          
+          {/* Elegant Staff Cards */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: '2rem',
+            maxWidth: '1000px',
+            margin: '0 auto'
+          }}>
             {staff.map((member, index) => (
-              <div key={index} className="card">
-                <h3>{member.name}</h3>
-                <p style={{color: '#ff6b6b', fontWeight: 'bold', marginBottom: '0.5rem'}}>
-                  {member.title}
-                </p>
-                <p style={{marginBottom: '1rem'}}>{member.bio}</p>
-                <a 
-                  href={`mailto:${member.email}`} 
-                  style={{
-                    color: '#4ecdc4',
-                    textDecoration: 'none',
-                    fontWeight: '500'
-                  }}
-                >
-                  ✉️ {member.email}
-                </a>
+              <div 
+                key={index}
+                style={{
+                  background: 'white',
+                  borderRadius: '20px',
+                  padding: '2.5rem',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+                  transition: 'all 0.3s ease',
+                  position: 'relative',
+                  overflow: 'hidden'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'translateY(-6px)'
+                  e.target.style.boxShadow = '0 8px 35px rgba(0,0,0,0.12)'
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'translateY(0)'
+                  e.target.style.boxShadow = '0 4px 20px rgba(0,0,0,0.06)'
+                }}
+              >
+                {/* Subtle gradient accent at top */}
+                <div style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '4px',
+                  background: `linear-gradient(90deg, ${
+                    index % 4 === 0 ? '#ff6b6b, #4ecdc4' : 
+                    index % 4 === 1 ? '#4ecdc4, #667eea' : 
+                    index % 4 === 2 ? '#667eea, #ff6b6b' :
+                    '#ff6b6b, #667eea'
+                  })`,
+                  borderRadius: '20px 20px 0 0'
+                }}></div>
+                
+                {/* Staff Avatar Circle */}
+                <div style={{
+                  width: '70px',
+                  height: '70px',
+                  borderRadius: '50%',
+                  background: `linear-gradient(135deg, ${
+                    index % 4 === 0 ? '#ff6b6b, #4ecdc4' : 
+                    index % 4 === 1 ? '#4ecdc4, #667eea' : 
+                    index % 4 === 2 ? '#667eea, #ff6b6b' :
+                    '#ff6b6b, #667eea'
+                  })`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '1.8rem',
+                  color: 'white',
+                  marginBottom: '1.5rem',
+                  flexShrink: 0,
+                  boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
+                }}>
+                  {member.name.split(' ').map(n => n[0]).join('')}
+                </div>
+                
+                <div>
+                  <h3 style={{
+                    margin: '0 0 0.6rem 0',
+                    fontSize: '1.4rem',
+                    fontWeight: '700',
+                    color: '#333',
+                    lineHeight: '1.3'
+                  }}>
+                    {member.name}
+                  </h3>
+                  
+                  <p style={{
+                    color: `${
+                      index % 4 === 0 ? '#ff6b6b' : 
+                      index % 4 === 1 ? '#4ecdc4' : 
+                      index % 4 === 2 ? '#667eea' :
+                      '#ff6b6b'
+                    }`,
+                    fontWeight: '600',
+                    fontSize: '1.1rem',
+                    margin: '0 0 1rem 0'
+                  }}>
+                    {member.title}
+                  </p>
+                  
+                  <p style={{
+                    fontSize: '1rem',
+                    color: '#666',
+                    lineHeight: '1.6',
+                    margin: '0 0 1.5rem 0'
+                  }}>
+                    {member.bio}
+                  </p>
+                  
+                  <a 
+                    href={`mailto:${member.email}`} 
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '0.6rem',
+                      color: '#4ecdc4',
+                      textDecoration: 'none',
+                      fontWeight: '600',
+                      fontSize: '1rem',
+                      padding: '0.8rem 1.5rem',
+                      background: 'rgba(78,205,196,0.08)',
+                      borderRadius: '25px',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.background = 'rgba(78,205,196,0.15)'
+                      e.target.style.transform = 'translateY(-1px)'
+                      e.target.style.boxShadow = '0 4px 12px rgba(78,205,196,0.2)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.background = 'rgba(78,205,196,0.08)'
+                      e.target.style.transform = 'translateY(0)'
+                      e.target.style.boxShadow = 'none'
+                    }}
+                  >
+                    <span>✉️</span>
+                    <span>{t('contact.staff.contactButton', 'Contact')}</span>
+                  </a>
+                </div>
               </div>
             ))}
           </div>
+          
+          {/* Call to Action for Staff Directory */}
+          <div style={{
+            textAlign: 'center',
+            marginTop: '3rem',
+            padding: '2.5rem',
+            background: 'white',
+            borderRadius: '20px',
+            boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+            position: 'relative',
+            overflow: 'hidden'
+          }}>
+            {/* Subtle gradient accent */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '4px',
+              background: 'linear-gradient(90deg, #ff6b6b, #4ecdc4, #667eea)',
+              borderRadius: '20px 20px 0 0'
+            }}></div>
+            
+            <h3 style={{
+              color: '#333',
+              fontSize: '1.4rem',
+              margin: '0 0 1rem 0',
+              fontWeight: '700'
+            }}>
+              🤝 {t('contact.staff.cta.title', 'Need to Speak with Someone Specific?')}
+            </h3>
+            <p style={{
+              color: '#666',
+              fontSize: '1.1rem',
+              margin: '0 0 2rem 0',
+              lineHeight: '1.6',
+              maxWidth: '600px',
+              marginLeft: 'auto',
+              marginRight: 'auto'
+            }}>
+              {t('contact.staff.cta.description', 'Our team members are specialists in different areas. Feel free to reach out directly to the person who can best help with your specific needs.')}
+            </p>
+            <div style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '1rem',
+              justifyContent: 'center'
+            }}>
+              <a 
+                href="tel:+15551234543"
+                style={{
+                  background: 'linear-gradient(135deg, #4ecdc4, #44a08d)',
+                  color: 'white',
+                  padding: '0.8rem 1.5rem',
+                  borderRadius: '25px',
+                  textDecoration: 'none',
+                  fontWeight: '600',
+                  fontSize: '0.95rem',
+                  boxShadow: '0 4px 15px rgba(78,205,196,0.3)',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'translateY(-2px)'
+                  e.target.style.boxShadow = '0 6px 20px rgba(78,205,196,0.4)'
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'translateY(0)'
+                  e.target.style.boxShadow = '0 4px 15px rgba(78,205,196,0.3)'
+                }}
+              >
+                📞 {t('contact.staff.cta.callButton', 'Call Main Line')}
+              </a>
+              <a 
+                href="mailto:info@happykidscenter.com"
+                style={{
+                  background: 'linear-gradient(135deg, #667eea, #764ba2)',
+                  color: 'white',
+                  padding: '0.8rem 1.5rem',
+                  borderRadius: '25px',
+                  textDecoration: 'none',
+                  fontWeight: '600',
+                  fontSize: '0.95rem',
+                  boxShadow: '0 4px 15px rgba(102,126,234,0.3)',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.transform = 'translateY(-2px)'
+                  e.target.style.boxShadow = '0 6px 20px rgba(102,126,234,0.4)'
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.transform = 'translateY(0)'
+                  e.target.style.boxShadow = '0 4px 15px rgba(102,126,234,0.3)'
+                }}
+              >
+                ✉️ {t('contact.staff.cta.emailButton', 'General Email')}
+              </a>
+            </div>
+          </div>
+          
+          {/* Mobile responsive styles for Contact Info and Staff Directory */}
+          <style jsx>{`
+            @media (max-width: 768px) {
+              /* Contact Information responsive adjustments */
+              .container > div[style*="flex"] {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 1.2rem !important;
+              }
+              
+              .container > div[style*="flex"] > div {
+                min-width: auto !important;
+                max-width: none !important;
+                flex: none !important;
+                padding: 1.5rem !important;
+              }
+              
+              /* Staff Directory responsive adjustments */
+              .container > div[style*="grid-template-columns"] {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+              }
+              
+              /* Staff card adjustments on mobile */
+              div[style*="padding: '2.5rem'"] {
+                padding: 1.8rem !important;
+              }
+              
+              /* Call to action buttons stack on mobile */
+              div[style*="flexWrap: 'wrap'"] {
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 0.8rem !important;
+              }
+              
+              div[style*="flexWrap: 'wrap'"] > a {
+                width: 100% !important;
+                max-width: 300px !important;
+                text-align: center !important;
+                justify-content: center !important;
+              }
+            }
+            
+            @media (max-width: 480px) {
+              /* Extra small screens - further optimizations */
+              .section-title {
+                font-size: 1.8rem !important;
+              }
+              
+              .section-subtitle {
+                font-size: 1rem !important;
+              }
+              
+              /* Contact cards more compact on very small screens */
+              div[style*="minWidth: '260px'"] {
+                min-width: auto !important;
+                padding: 1.2rem !important;
+              }
+              
+              /* Staff avatars smaller on mobile */
+              div[style*="width: '70px'"] {
+                width: 60px !important;
+                height: 60px !important;
+                font-size: 1.6rem !important;
+              }
+              
+              /* Smaller font sizes on mobile */
+              h3[style*="fontSize: '1.4rem'"] {
+                font-size: 1.2rem !important;
+              }
+              
+              p[style*="fontSize: '1.1rem'"] {
+                font-size: 1rem !important;
+              }
+            }
+          `}</style>
         </div>
       </section>
 
