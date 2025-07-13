@@ -9,28 +9,28 @@ const Home = () => {
   const heroSlides = [
     {
       id: 1,
-      image: 'https://images.unsplash.com/photo-1544376664-80b17f09d399?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+      image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
       title: t('home.hero.title'),
       subtitle: t('home.hero.subtitle'),
       description: t('home.hero.description')
     },
     {
       id: 2,
-      image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+      image: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
       title: t('home.hero.slides.slide2.title'),
       subtitle: t('home.hero.slides.slide2.subtitle'),
       description: t('home.hero.slides.slide2.description')
     },
     {
       id: 3,
-      image: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+      image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
       title: t('home.hero.slides.slide3.title'),
       subtitle: t('home.hero.slides.slide3.subtitle'),
       description: t('home.hero.slides.slide3.description')
     },
     {
       id: 4,
-      image: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+      image: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
       title: t('home.hero.slides.slide4.title'),
       subtitle: t('home.hero.slides.slide4.subtitle'),
       description: t('home.hero.slides.slide4.description')
