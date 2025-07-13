@@ -21,11 +21,11 @@ const Pricing = () => {
       popular: true
     },
     {
-      title: t('pricing.perPersonOption.title'),
+      title: t('pricing.perPerson.title'),
       price: '€6',
       duration: t('pricing.perPersonHour'),
-      description: t('pricing.perPersonOption.description'),
-      features: getFeatures('pricing.perPersonOption.features'),
+      description: t('pricing.perPerson.description'),
+      features: getFeatures('pricing.perPerson.features'),
       popular: false
     },
     {
