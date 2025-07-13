@@ -18,7 +18,24 @@ export const translations = {
         title: "Happy Kids Center",
         subtitle: "Premium Party Venue with Two Amazing Spaces",
         description: "Create unforgettable celebrations in our dedicated Kids Playroom or Adult Recreation Room. Perfect for birthdays, family gatherings, and special events.",
-        cta: "Book Your Event"
+        cta: "Book Your Event",
+        slides: {
+          slide2: {
+            title: "Birthday Party Venue",
+            subtitle: "Make Every Celebration Special",
+            description: "Professional party setup with decorations, entertainment, and memorable experiences for all ages."
+          },
+          slide3: {
+            title: "Safe Play Environment",
+            subtitle: "Where Fun Meets Safety",
+            description: "Carefully designed spaces with age-appropriate equipment and constant supervision for peace of mind."
+          },
+          slide4: {
+            title: "Family Recreation",
+            subtitle: "Together Time Made Better",
+            description: "Dedicated spaces for families to connect, play, and create lasting memories together."
+          }
+        }
       },
       about: {
         title: "About Our Venue",
@@ -85,6 +102,18 @@ export const translations = {
           "Safe play equipment",
           "Colorful, engaging environment",
           "Suitable for ages 3-12"
+        ]
+      },
+      perPerson: {
+        title: "Per Person (Kid + Adult)",
+        description: "Perfect for families wanting flexible visit times",
+        features: [
+          "Access to both rooms",
+          "1 kid + 1 adult included",
+          "Additional person +€3/hour",
+          "5+ hours: €5/hour discount",
+          "Minimum 2 hours booking",
+          "Maximum 8 hours per day"
         ]
       },
       adultRoom: {
@@ -303,7 +332,24 @@ export const translations = {
         title: "Център Щастливи Деца",
         subtitle: "Премиум място за празници с два невероятни помещения",
         description: "Създайте незабравими празници в нашата специализирана детска стая за игра или стая за възрастни. Перфектно за рождени дни, семейни събирания и специални събития.",
-        cta: "Резервирайте събитието си"
+        cta: "Резервирайте събитието си",
+        slides: {
+          slide2: {
+            title: "Място за рождени дни",
+            subtitle: "Направете всеки празник специален",
+            description: "Професионална организация на партита с украса, забавления и незабравими преживявания за всички възрасти."
+          },
+          slide3: {
+            title: "Безопасна среда за игра",
+            subtitle: "Където забавлението среща безопасността",
+            description: "Внимателно проектирани пространства с подходящо за възрастта оборудване и постоянен надзор за спокойствие."
+          },
+          slide4: {
+            title: "Семейна почивка",
+            subtitle: "Времето заедно стана по-добро",
+            description: "Специални пространства за семейства да се свързват, играят и създават трайни спомени заедно."
+          }
+        }
       },
       about: {
         title: "За нашето място",
@@ -370,6 +416,18 @@ export const translations = {
           "Безопасно оборудване за игра",
           "Цветна, ангажираща среда",
           "Подходяща за възраст 3-12 години"
+        ]
+      },
+      perPerson: {
+        title: "На човек (Дете + Възрастен)",
+        description: "Перфектно за семейства, които искат гъвкави часове за посещение",
+        features: [
+          "Достъп до двете стаи",
+          "1 дете + 1 възрастен включени",
+          "Допълнителен човек +3€/час",
+          "5+ часа: отстъпка 5€/час",
+          "Минимум 2 часа резервация",
+          "Максимум 8 часа на ден"
         ]
       },
       adultRoom: {

@@ -17,23 +17,23 @@ const Home = () => {
     {
       id: 2,
       image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-      title: 'Birthday Party Venue',
-      subtitle: 'Make Every Celebration Special',
-      description: 'Professional party setup with decorations, entertainment, and memorable experiences for all ages.'
+      title: t('home.hero.slides.slide2.title'),
+      subtitle: t('home.hero.slides.slide2.subtitle'),
+      description: t('home.hero.slides.slide2.description')
     },
     {
       id: 3,
       image: 'https://images.unsplash.com/photo-1587654780291-39c9404d746b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-      title: 'Safe Play Environment',
-      subtitle: 'Where Fun Meets Safety',
-      description: 'Carefully designed spaces with age-appropriate equipment and constant supervision for peace of mind.'
+      title: t('home.hero.slides.slide3.title'),
+      subtitle: t('home.hero.slides.slide3.subtitle'),
+      description: t('home.hero.slides.slide3.description')
     },
     {
       id: 4,
       image: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
-      title: 'Family Recreation',
-      subtitle: 'Together Time Made Better',
-      description: 'Dedicated spaces for families to connect, play, and create lasting memories together.'
+      title: t('home.hero.slides.slide4.title'),
+      subtitle: t('home.hero.slides.slide4.subtitle'),
+      description: t('home.hero.slides.slide4.description')
     }
   ]
 
@@ -108,7 +108,7 @@ const Home = () => {
                   textShadow: '2px 2px 4px rgba(0,0,0,0.5)',
                   color: 'white'
                 }}>
-                  {index === 0 ? t('home.hero.title') : slide.title}
+                  {slide.title}
                 </h1>
                 <h2 className="hero-subtitle" style={{
                   fontSize: '1.8rem',
@@ -116,7 +116,7 @@ const Home = () => {
                   color: '#ffe66d',
                   textShadow: '1px 1px 2px rgba(0,0,0,0.5)'
                 }}>
-                  {index === 0 ? t('home.hero.subtitle') : slide.subtitle}
+                  {slide.subtitle}
                 </h2>
                 <p style={{
                   fontSize: '1.2rem',
@@ -126,7 +126,7 @@ const Home = () => {
                   maxWidth: '600px',
                   margin: '0 auto 2.5rem'
                 }}>
-                  {index === 0 ? t('home.hero.description') : slide.description}
+                  {slide.description}
                 </p>
                 <Link 
                   to="/reservations" 

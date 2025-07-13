@@ -21,6 +21,14 @@ const Pricing = () => {
       popular: true
     },
     {
+      title: t('pricing.perPerson.title'),
+      price: '€6',
+      duration: 'per hour',
+      description: t('pricing.perPerson.description'),
+      features: getFeatures('pricing.perPerson.features'),
+      popular: false
+    },
+    {
       title: t('pricing.adultRoom.title'),
       price: '€3',
       duration: t('pricing.perPerson') + '/' + t('pricing.hours').slice(0, -1),
