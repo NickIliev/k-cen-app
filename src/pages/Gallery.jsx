@@ -3,6 +3,42 @@ import { useLanguage } from '../contexts/LanguageContext'
 
 const Gallery = () => {
   const { t } = useLanguage()
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  
+  // Close modal when pressing Escape
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setSelectedImage(null)
+      }
+      if (selectedImage) {
+        if (e.key === 'ArrowLeft') {
+          navigateImage(-1)
+        }
+        if (e.key === 'ArrowRight') {
+          navigateImage(1)
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [selectedImage])
+
+  const openLightbox = (image, index) => {
+    setSelectedImage(image)
+    setCurrentImageIndex(index)
+  }
+
+  const navigateImage = (direction) => {
+    const newIndex = currentImageIndex + direction
+    if (newIndex >= 0 && newIndex < adultRoomImages.length) {
+      setCurrentImageIndex(newIndex)
+      setSelectedImage(adultRoomImages[newIndex])
+    }
+  }
+
   // Kids Playroom slideshow images (using placeholder URLs)
   const playroomSlides = [
     {
@@ -219,40 +255,297 @@ const Gallery = () => {
         <div className="container">
           <h2 className="section-title">{t('gallery.adultRoom')}</h2>
           <p className="section-subtitle">
-            {t('gallery.subtitle')}
+            {t('gallery.subtitle')} - Click on any image to view in full screen
           </p>
+          
+          {/* Gallery Grid */}
           <div style={{
             display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-            gap: '2rem', 
-            maxWidth: '1000px', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+            gap: '1.5rem', 
+            maxWidth: '1200px', 
             margin: '0 auto'
           }}>
-            {adultRoomImages.map((item) => (
-              <div key={item.id} style={{
-                borderRadius: '15px',
-                overflow: 'hidden',
-                boxShadow: '0 5px 15px rgba(0,0,0,0.1)',
-                background: 'white',
-                transition: 'transform 0.3s ease'
-              }}>
+            {adultRoomImages.map((item, index) => (
+              <div
+                key={item.id}
+                onClick={() => openLightbox(item, index)}
+                style={{
+                  borderRadius: '15px',
+                  overflow: 'hidden',
+                  boxShadow: '0 8px 25px rgba(0,0,0,0.15)',
+                  background: 'white',
+                  transition: 'all 0.3s ease',
+                  cursor: 'pointer',
+                  position: 'relative'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-5px)'
+                  e.currentTarget.style.boxShadow = '0 15px 35px rgba(0,0,0,0.2)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)'
+                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)'
+                }}
+              >
+                {/* Image Container */}
                 <div style={{
-                  height: '200px',
+                  height: '220px',
                   background: `url(${item.image})`,
                   backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }} />
+                  backgroundPosition: 'center',
+                  position: 'relative',
+                  overflow: 'hidden'
+                }}>
+                  {/* Overlay on hover */}
+                  <div style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(78, 205, 196, 0.8))',
+                    opacity: 0,
+                    transition: 'opacity 0.3s ease',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    fontSize: '2rem'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.opacity = '1'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.opacity = '0'
+                  }}
+                  >
+                    🔍
+                  </div>
+                </div>
+                
+                {/* Content */}
                 <div style={{padding: '1.5rem', textAlign: 'center'}}>
-                  <h3 style={{marginBottom: '0.5rem', color: '#333'}}>{item.title}</h3>
-                  <p style={{fontSize: '0.9rem', color: '#666', margin: '0'}}>
+                  <h3 style={{
+                    marginBottom: '0.75rem', 
+                    color: '#333',
+                    fontSize: '1.2rem',
+                    fontWeight: '600'
+                  }}>
+                    {item.title}
+                  </h3>
+                  <p style={{
+                    fontSize: '0.95rem', 
+                    color: '#666', 
+                    margin: '0',
+                    lineHeight: '1.5'
+                  }}>
                     {item.description}
                   </p>
+                  
+                  {/* View Gallery Button */}
+                  <div style={{
+                    marginTop: '1rem',
+                    padding: '0.5rem 1rem',
+                    background: 'linear-gradient(45deg, #ff6b6b, #4ecdc4)',
+                    color: 'white',
+                    borderRadius: '25px',
+                    fontSize: '0.85rem',
+                    fontWeight: '500',
+                    display: 'inline-block',
+                    transition: 'all 0.3s ease'
+                  }}>
+                    🖼️ View in Gallery
+                  </div>
                 </div>
               </div>
             ))}
           </div>
+          
+          {/* Gallery Instructions */}
+          <div style={{
+            textAlign: 'center', 
+            marginTop: '2rem',
+            padding: '1.5rem',
+            background: 'linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(78, 205, 196, 0.1))',
+            borderRadius: '15px',
+            maxWidth: '600px',
+            margin: '2rem auto 0'
+          }}>
+            <h4 style={{color: '#333', marginBottom: '1rem'}}>
+              🎯 Interactive Gallery Features
+            </h4>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+              gap: '1rem',
+              fontSize: '0.9rem',
+              color: '#666'
+            }}>
+              <div>�️ <strong>Click</strong><br/>Open lightbox</div>
+              <div>⌨️ <strong>Keyboard</strong><br/>Arrow keys & Escape</div>
+              <div>📱 <strong>Touch</strong><br/>Tap to view</div>
+              <div>🖼️ <strong>Fullscreen</strong><br/>Immersive viewing</div>
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* Custom Lightbox Modal */}
+      {selectedImage && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0, 0, 0, 0.9)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+          padding: '2rem'
+        }}
+        onClick={() => setSelectedImage(null)}
+        >
+          <div style={{
+            position: 'relative',
+            maxWidth: '90vw',
+            maxHeight: '90vh',
+            background: 'white',
+            borderRadius: '15px',
+            overflow: 'hidden',
+            boxShadow: '0 20px 60px rgba(0,0,0,0.3)'
+          }}
+          onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedImage(null)}
+              style={{
+                position: 'absolute',
+                top: '15px',
+                right: '15px',
+                background: 'rgba(0,0,0,0.5)',
+                border: 'none',
+                borderRadius: '50%',
+                width: '40px',
+                height: '40px',
+                color: 'white',
+                fontSize: '1.5rem',
+                cursor: 'pointer',
+                zIndex: 1001,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'background 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = 'rgba(0,0,0,0.7)'
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = 'rgba(0,0,0,0.5)'
+              }}
+            >
+              ×
+            </button>
+
+            {/* Navigation Buttons */}
+            {currentImageIndex > 0 && (
+              <button
+                onClick={() => navigateImage(-1)}
+                style={{
+                  position: 'absolute',
+                  left: '15px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'rgba(0,0,0,0.5)',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: '40px',
+                  height: '40px',
+                  color: 'white',
+                  fontSize: '1.5rem',
+                  cursor: 'pointer',
+                  zIndex: 1001,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                ‹
+              </button>
+            )}
+
+            {currentImageIndex < adultRoomImages.length - 1 && (
+              <button
+                onClick={() => navigateImage(1)}
+                style={{
+                  position: 'absolute',
+                  right: '15px',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  background: 'rgba(0,0,0,0.5)',
+                  border: 'none',
+                  borderRadius: '50%',
+                  width: '40px',
+                  height: '40px',
+                  color: 'white',
+                  fontSize: '1.5rem',
+                  cursor: 'pointer',
+                  zIndex: 1001,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                ›
+              </button>
+            )}
+
+            {/* Image */}
+            <img
+              src={selectedImage.image}
+              alt={selectedImage.title}
+              style={{
+                width: '100%',
+                height: 'auto',
+                maxHeight: '70vh',
+                objectFit: 'contain',
+                display: 'block'
+              }}
+            />
+
+            {/* Image Info */}
+            <div style={{
+              padding: '1.5rem',
+              textAlign: 'center'
+            }}>
+              <h3 style={{
+                margin: '0 0 0.5rem 0',
+                color: '#333',
+                fontSize: '1.3rem'
+              }}>
+                {selectedImage.title}
+              </h3>
+              <p style={{
+                margin: 0,
+                color: '#666',
+                fontSize: '1rem'
+              }}>
+                {selectedImage.description}
+              </p>
+              <div style={{
+                marginTop: '1rem',
+                fontSize: '0.9rem',
+                color: '#999'
+              }}>
+                Image {currentImageIndex + 1} of {adultRoomImages.length}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Activities Section */}
       <section className="section">
